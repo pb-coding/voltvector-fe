@@ -1,11 +1,13 @@
-import { axiosPrivate } from "./axios";
-import { use, useEffect } from "react";
-import useRefreshToken from "./useRefreshToken";
-import useAuth from "./useAuth";
+import { useEffect } from "react";
+import { AxiosInstance } from "axios";
 
-const useAxiosPrivate = () => {
+import { axiosPrivate } from "@/global/auth/axios";
+import { useRefreshToken } from "@/global/auth/hooks/useRefreshToken";
+import { useAuth } from "@/global/auth/hooks/useAuth";
+
+export const useAuthenticatedAxios = (): AxiosInstance => {
   const refresh = useRefreshToken();
-  const { auth, setAuth } = useAuth();
+  const { auth } = useAuth();
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
@@ -21,8 +23,8 @@ const useAxiosPrivate = () => {
     const responseIntercept = axiosPrivate.interceptors.response.use(
       (response) => response,
       async (error) => {
-        const previousRequest = error.config;
-        if (error.response?.status === 401 && !previousRequest?.sent) {
+        const previousRequest = error?.config;
+        if (error?.response?.status === 401 && !previousRequest?.sent) {
           previousRequest.sent = true;
           const newAccessToken = await refresh();
           previousRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
@@ -40,5 +42,3 @@ const useAxiosPrivate = () => {
 
   return axiosPrivate;
 };
-
-export default useAxiosPrivate;

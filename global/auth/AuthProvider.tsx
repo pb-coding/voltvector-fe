@@ -1,23 +1,19 @@
 "use client";
 
-import { createContext, useState, ReactNode } from "react";
+import { createContext, FC, useState, ReactNode } from "react";
+import { AuthStateType, AuthContextType } from "@/global/auth/types";
 
-// TODO: implement roles in FE and BE
-// roles?: string[];
-interface AuthState {
-  user?: string;
-  accessToken?: string;
-}
+export const AuthContext = createContext<AuthContextType>({
+  auth: { accessToken: undefined },
+  setAuth: () => {},
+});
 
-interface AuthContextProps {
-  auth: AuthState;
-  setAuth: React.Dispatch<React.SetStateAction<AuthState>>;
-}
+type AuthProviderProps = {
+  children: ReactNode;
+};
 
-const AuthContext = createContext<AuthContextProps | undefined>(undefined);
-
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [auth, setAuth] = useState<AuthState>({});
+const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+  const [auth, setAuth] = useState<AuthStateType>({});
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
@@ -26,4 +22,4 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default AuthContext;
+export default AuthProvider;

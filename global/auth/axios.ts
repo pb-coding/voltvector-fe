@@ -1,4 +1,5 @@
 import axios from "axios";
+// BASE_URL is empty here since next.config.js proxies already everything to the backend
 const BASE_URL = "";
 
 export default axios.create({

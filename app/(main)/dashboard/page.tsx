@@ -1,7 +1,8 @@
-import React from "react";
-import Users from "./Users";
+import { FC } from "react";
 
-export default function Page() {
+import Users from "@/app//(main)/dashboard/Users";
+
+const DashboardPage: FC = () => {
   return (
     <main className="p-4 md:ml-64 h-auto pt-20">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
@@ -28,4 +29,5 @@ export default function Page() {
       </div>
     </main>
   );
-}
+};
+export default DashboardPage;

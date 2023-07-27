@@ -1,47 +1,13 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FC } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
-import axios from "@/global/auth/axios";
-import useAuth from "@/global/auth/useAuth";
-import { LOGIN_PATH } from "@/global/auth/constants";
+import { useLogin } from "@/global/auth/hooks/useLogin";
 
-const Login = () => {
-  const { setAuth } = useAuth();
-  const router = useRouter();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // const [errorMessage, setErrorMessage] = useState("");
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        LOGIN_PATH,
-        JSON.stringify({ email, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(JSON.stringify(response.data));
-
-      const accessToken = response?.data?.accessToken;
-      // TODO: implement roles in FE and BE
-      // const roles = response?.data?.roles;
-      setAuth({ accessToken });
-      setEmail("");
-      setPassword("");
-      router.push("/dashboard"); //TODO: outsource paths in constants
-    } catch (error) {
-      // TODO: Handle errors
-      console.error("An error occurred while logging in", error);
-    }
-  };
+const LoginPage: FC = () => {
+  const { handleLoginSubmit, email, setEmail, password, setPassword } =
+    useLogin();
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -50,14 +16,15 @@ const Login = () => {
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <Image
-            className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-            alt="logo"
-            width={100}
-            height={60}
-          />
-          Flowbite
+          <div className="relative h-8 w-8 mr-1">
+            <Image
+              src="/voltvector_logo.png"
+              alt="Voltvector Logo"
+              width={100}
+              height={100}
+            />
+          </div>
+          VoltVector
         </a>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -67,7 +34,7 @@ const Login = () => {
             <form
               className="space-y-4 md:space-y-6"
               action="#"
-              onSubmit={handleSubmit}
+              onSubmit={handleLoginSubmit}
             >
               <div>
                 <label
@@ -153,5 +120,4 @@ const Login = () => {
     </section>
   );
 };
-
-export default Login;
+export default LoginPage;

@@ -1,6 +1,6 @@
 import axios from "@/global/auth/axios";
 import { useAuth } from "@/global/auth/hooks/useAuth";
-import { REFRESH_PATH } from "@/global/auth/constants";
+import { REFRESH_PATH } from "@/global/routes";
 
 export const useRefreshToken = () => {
   const { setAuth } = useAuth();

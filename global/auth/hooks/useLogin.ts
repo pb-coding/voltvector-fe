@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 import axios from "@/global/auth/axios";
 import { useAuth } from "@/global/auth/hooks/useAuth";
-import { LOGIN_PATH } from "@/global/auth/constants";
+import { LOGIN_PATH } from "@/global/routes";
 
 export const useLogin = () => {
   const { setAuth } = useAuth();

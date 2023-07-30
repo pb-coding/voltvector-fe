@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/global/auth/hooks/useAuth";
-import { LOGOUT_PATH } from "@/global/auth/constants";
+import { LOGOUT_PATH } from "@/global/routes";
 import axios from "@/global/auth/axios";
 
 export const useLogout = () => {

@@ -4,7 +4,7 @@ import { ErrorHandlerContext } from "@/global/error/ErrorHandlerProvider";
 import { useAuthenticatedAxios } from "@/global/auth/hooks/useAuthenticatedAxios";
 
 export const useFetch = (url: string) => {
-  const [data, setData] = useState([]); // TODO: type this
+  const [data, setData] = useState(null); // TODO: type this
   const [loading, setLoading] = useState(false);
   const { setError } = useContext(ErrorHandlerContext);
 

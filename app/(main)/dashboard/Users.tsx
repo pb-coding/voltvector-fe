@@ -3,7 +3,7 @@
 import { FC, useState, useEffect } from "react";
 
 import { useFetch } from "@/global/hooks/useFetch";
-import { USER_PATH } from "@/global/auth/constants";
+import { USER_PATH } from "@/global/routes";
 
 interface User {
   id: number;

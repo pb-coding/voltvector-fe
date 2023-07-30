@@ -1,11 +1,8 @@
 import { FC } from "react";
+import { redirect } from "next/navigation";
 
 const SettingsPage: FC = () => {
-  return (
-    <div>
-      <h1>Settings</h1>
-    </div>
-  );
+  redirect("/settings/enphase");
 };
 
 export default SettingsPage;

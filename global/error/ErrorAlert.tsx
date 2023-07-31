@@ -6,15 +6,15 @@ import { ErrorHandlerContext } from "@/global/error/ErrorHandlerProvider";
 import { clear } from "console";
 
 const ErrorAlert: FC = () => {
-  const { error, setError } = useContext(ErrorHandlerContext);
+  const { errorAlert, setErrorAlert } = useContext(ErrorHandlerContext);
 
   const clearError = useCallback(
-    () => setError({ message: null, status: null, active: false }),
-    [setError]
+    () => setErrorAlert({ message: null, status: null, active: false }),
+    [setErrorAlert]
   );
 
   useEffect(() => {
-    if (error) {
+    if (errorAlert) {
       const timer = setTimeout(() => {
         clearError();
       }, 5000);
@@ -22,9 +22,9 @@ const ErrorAlert: FC = () => {
       // Clear timeout if the component is unmounted
       return () => clearTimeout(timer);
     }
-  }, [error, clearError]);
+  }, [errorAlert, clearError]);
 
-  if (error?.active) {
+  if (errorAlert?.active) {
     return (
       <div
         className="fixed top-0 left-0 right-0 z-50 max-w-md mx-auto mt-4 px-4"
@@ -42,8 +42,10 @@ const ErrorAlert: FC = () => {
           </svg>
           <span className="sr-only">Info</span>
           <div>
-            <span className="font-medium">Status Code: {error.status}</span>{" "}
-            {error.message}
+            <span className="font-medium">
+              Status Code: {errorAlert.status}
+            </span>{" "}
+            {errorAlert.message}
           </div>
           <button
             onClick={clearError}

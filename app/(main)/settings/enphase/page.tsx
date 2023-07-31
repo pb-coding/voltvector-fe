@@ -1,7 +1,7 @@
 import { FC } from "react";
-import EnphaseAuthSection from "./EnphaseAuthSection";
-import SettingsTabs from "../SettingsTabs";
-import { settingsTabNames } from "../SettingsTabs";
+import EnphaseAuthSection from "@/page/main/settings/enphase/EnphaseAuthSection";
+import SettingsTabs from "@/page/main/settings/SettingsTabs";
+import { settingsTabNames } from "@/page/main/settings/SettingsTabs";
 
 const EnphaseSettingsPage: FC = () => {
   return (

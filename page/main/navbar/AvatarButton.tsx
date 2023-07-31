@@ -1,11 +1,15 @@
 import { FC, Dispatch, SetStateAction } from "react";
 
+import Avatar from "@/global/ui/Avatar";
+import { useUserAuth } from "@/global/auth/hooks/useUserAuth";
+
 type AvatarButtonProps = {
-  isAvatarDropdownOpen: boolean;
   setIsAvatarDropdownOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const AvatarButton: FC<AvatarButtonProps> = ({ setIsAvatarDropdownOpen }) => {
+  const { userAuth } = useUserAuth();
+
   const toggleAvatarDropdown = () => {
     setIsAvatarDropdownOpen((prev) => !prev);
   };
@@ -20,11 +24,7 @@ const AvatarButton: FC<AvatarButtonProps> = ({ setIsAvatarDropdownOpen }) => {
         // data-dropdown-toggle="dropdown-user"
       >
         <span className="sr-only">Open user menu</span>
-        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-          <span className="font-medium text-gray-600 dark:text-gray-300">
-            PB
-          </span>
-        </div>
+        <Avatar initials={userAuth?.name?.charAt(0) ?? ""} />
       </button>
     </div>
   );

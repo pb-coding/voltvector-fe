@@ -2,9 +2,9 @@
 
 import { FC, useState } from "react";
 
-import NavbarBrand from "@/global/navbar/NavbarBrand";
-import AvatarDropdown from "@/global/navbar/AvatarDropdown";
-import AvatarButton from "@/global/navbar/AvatarButton";
+import NavbarBrand from "@/page/main/navbar/NavbarBrand";
+import AvatarDropdown from "@/page/main/navbar/AvatarDropdown";
+import AvatarButton from "@/page/main/navbar/AvatarButton";
 
 const Navbar: FC = () => {
   const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
@@ -42,7 +42,6 @@ const Navbar: FC = () => {
             <div className="flex items-center ml-3">
               <div className="relative">
                 <AvatarButton
-                  isAvatarDropdownOpen={isAvatarDropdownOpen}
                   setIsAvatarDropdownOpen={setIsAvatarDropdownOpen}
                 />
                 {isAvatarDropdownOpen && <AvatarDropdown />}

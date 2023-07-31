@@ -1,9 +1,9 @@
 import { FC } from "react";
 import Link from "next/link";
-import HomeIcon from "../icons/HomeIcon";
-import SunIcon from "../icons/SunIcon";
-import SettingsIcon from "../icons/SettingsIcon";
-import PieDiagramIcon from "../icons/PieDiagramIcon";
+import HomeIcon from "../../../global/icons/HomeIcon";
+import SunIcon from "../../../global/icons/SunIcon";
+import SettingsIcon from "../../../global/icons/SettingsIcon";
+import PieDiagramIcon from "../../../global/icons/PieDiagramIcon";
 
 // TODO: conditionally rendering sidebar elements & extracting into separate components
 

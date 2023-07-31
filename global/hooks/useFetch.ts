@@ -3,10 +3,11 @@ import { useCallback, useContext, useState, useEffect } from "react";
 import { ErrorHandlerContext } from "@/global/error/ErrorHandlerProvider";
 import { useAuthenticatedAxios } from "@/global/auth/hooks/useAuthenticatedAxios";
 
-export const useFetch = (url: string) => {
-  const [data, setData] = useState(null); // TODO: type this
-  const [loading, setLoading] = useState(false);
-  const { setError } = useContext(ErrorHandlerContext);
+export const useFetch = <DataType>(url: string) => {
+  const [data, setData] = useState<DataType | null>(null); // TODO: type this
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+  const { setErrorAlert } = useContext(ErrorHandlerContext);
 
   const authenticatedAxios = useAuthenticatedAxios();
 
@@ -31,13 +32,13 @@ export const useFetch = (url: string) => {
           errorMessage = "An error occurred while processing your request.";
           break;
       }
-      setError({
+      setErrorAlert({
         message: errorMessage,
         status: errorStatusCode,
         active: true,
       });
     },
-    [setError]
+    [setErrorAlert]
   );
 
   useEffect(() => {
@@ -54,6 +55,7 @@ export const useFetch = (url: string) => {
       } catch (error: any) {
         const errorStatusCode = error.response.status as number;
         createApiResponseErrorAlert(errorStatusCode);
+        isMounted && setError(error);
       } finally {
         isMounted && setLoading(false); // TODO: check if the isMounted is necessary
       }
@@ -67,5 +69,5 @@ export const useFetch = (url: string) => {
     };
   }, [url, authenticatedAxios, createApiResponseErrorAlert]);
 
-  return { data, loading };
+  return { data, loading, error };
 };

@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
-import AuthProvider from "@/global/auth/AuthProvider";
+import AuthProvider from "@/global/auth/UserAuthProvider";
 import ErrorHandlerProvider from "@/global/error/ErrorHandlerProvider";
 
 const inter = Inter({ subsets: ["latin"] });

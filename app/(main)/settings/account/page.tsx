@@ -1,6 +1,6 @@
 import { FC } from "react";
-import SettingsTabs from "../SettingsTabs";
-import { settingsTabNames } from "../SettingsTabs";
+import SettingsTabs from "../../../../page/main/settings/SettingsTabs";
+import { settingsTabNames } from "../../../../page/main/settings/SettingsTabs";
 
 const EnphaseSettingsPage: FC = () => {
   return (

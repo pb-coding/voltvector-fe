@@ -5,6 +5,6 @@ export type ErrorStateType = {
 };
 
 export type ErrorContextType = {
-  error?: ErrorStateType;
-  setError: (error: ErrorStateType) => void;
+  errorAlert?: ErrorStateType;
+  setErrorAlert: (error: ErrorStateType) => void;
 };

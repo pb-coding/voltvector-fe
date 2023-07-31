@@ -1,12 +1,23 @@
 // TODO: implement roles in FE and BE
 // roles?: string[];
-export type AuthStateType = {
+
+export type UserAuthStateType = {
+  id?: number;
+  name?: string;
+  email?: string;
+  roles?: RoleType[];
   accessToken?: string;
-  roles?: string[];
-  user?: string;
 };
 
-export type AuthContextType = {
-  auth: AuthStateType;
-  setAuth: (auth: AuthStateType) => void;
+export type UserAuthContextType = {
+  userAuth: UserAuthStateType;
+  setUserAuth: (auth: UserAuthStateType) => void;
+};
+
+export type RoleType = {
+  id: number;
+  role: "ADMIN" | "USER";
+  createdAt: Date;
+  updatedAt: Date;
+  userId: number;
 };

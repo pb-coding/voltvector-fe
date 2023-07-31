@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 
-import Navbar from "@/global/navbar/Navbar";
-import Sidebar from "@/global/sidebar/Sidebar";
+import Navbar from "@/page/main/navbar/Navbar";
+import Sidebar from "@/page/main/sidebar/Sidebar";
 import ErrorAlert from "@/global/error/ErrorAlert";
 
 type MainLayoutProps = {

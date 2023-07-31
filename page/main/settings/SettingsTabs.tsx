@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import Tabs from "@/global/Tabs";
+import Tabs from "@/global/ui/Tabs";
 
 type SettingsPageProps = {
   tab: string;

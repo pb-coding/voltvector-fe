@@ -2,11 +2,11 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import axios from "@/global/auth/axios";
-import { useAuth } from "@/global/auth/hooks/useAuth";
-import { LOGIN_PATH } from "@/global/routes";
+import { useUserAuth } from "@/global/auth/hooks/useUserAuth";
+import { LOGIN_PATH } from "@/global/apiRoutes";
 
 export const useLogin = () => {
-  const { setAuth } = useAuth();
+  const { setUserAuth } = useUserAuth();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -25,12 +25,13 @@ export const useLogin = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response.data));
+      const userAuthData = response.data.userAuthData;
 
-      const accessToken = response?.data?.accessToken;
+      console.log(userAuthData);
       // TODO: implement roles in FE and BE
       // const roles = response?.data?.roles;
-      setAuth({ accessToken: accessToken });
+
+      setUserAuth(userAuthData);
       setEmail("");
       setPassword("");
 

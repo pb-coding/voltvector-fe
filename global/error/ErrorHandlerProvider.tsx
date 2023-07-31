@@ -4,8 +4,8 @@ import { createContext, FC, ReactNode, useState } from "react";
 import { ErrorContextType, ErrorStateType } from "@/global/error/types";
 
 export const ErrorHandlerContext = createContext<ErrorContextType>({
-  error: { message: null, status: null, active: false },
-  setError: () => {},
+  errorAlert: { message: null, status: null, active: false },
+  setErrorAlert: () => {},
 });
 
 type ErrorHandlerProviderProps = {
@@ -13,14 +13,14 @@ type ErrorHandlerProviderProps = {
 };
 
 const ErrorHandlerProvider: FC<ErrorHandlerProviderProps> = ({ children }) => {
-  const [error, setError] = useState<ErrorStateType>({
+  const [errorAlert, setErrorAlert] = useState<ErrorStateType>({
     message: null,
     status: null,
     active: false,
   });
 
   return (
-    <ErrorHandlerContext.Provider value={{ error, setError }}>
+    <ErrorHandlerContext.Provider value={{ errorAlert, setErrorAlert }}>
       {children}
     </ErrorHandlerContext.Provider>
   );

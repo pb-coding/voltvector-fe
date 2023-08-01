@@ -1,15 +1,25 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import Avatar from "@/global/ui/Avatar";
 import { UserType } from "@/page/main/admin/users/types";
+import { ManageUsersContext } from "@/page/main/admin/users/ManageUsersProvider";
 
-type UserTableBodyProps = {
-  users: UserType[];
-};
+const UserTableBody: FC = () => {
+  const { displayedUsers, checkedUsers, setCheckedUsers } =
+    useContext(ManageUsersContext);
 
-const UserTableBody: FC<UserTableBodyProps> = ({ users }) => {
+  const handleCheckboxChange = (user: UserType) => {
+    if (checkedUsers.includes(user)) {
+      setCheckedUsers(
+        checkedUsers.filter((checkedUser) => checkedUser !== user)
+      );
+    } else {
+      setCheckedUsers([...checkedUsers, user]);
+    }
+  };
+
   return (
     <tbody>
-      {users.map((user) => (
+      {displayedUsers?.map((user) => (
         <tr
           className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           key={user.id}
@@ -19,6 +29,8 @@ const UserTableBody: FC<UserTableBodyProps> = ({ users }) => {
               <input
                 id="checkbox-table-search-1"
                 type="checkbox"
+                checked={checkedUsers.includes(user)}
+                onChange={() => handleCheckboxChange(user)}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               ></input>
               <label htmlFor="checkbox-table-search-1" className="sr-only">

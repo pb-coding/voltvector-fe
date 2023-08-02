@@ -1,6 +1,8 @@
 import { FC } from "react";
 
 import ManageUsers from "@/page/main/admin/users/ManageUsers";
+import ProtectedRoute from "@/global/auth/ProtectedRoute";
+import { Role } from "@/global/auth/types";
 
 const ManageUsersPage: FC = () => {
   return (

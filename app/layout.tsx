@@ -2,8 +2,9 @@ import { FC, ReactNode } from "react";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
-import AuthProvider from "@/global/auth/UserAuthProvider";
+import UserAuthProvider from "@/global/auth/UserAuthProvider";
 import ErrorHandlerProvider from "@/global/error/ErrorHandlerProvider";
+import ErrorAlert from "@/global/error/ErrorAlert";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,8 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
       </head>
       <body className={inter.className}>
         <ErrorHandlerProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <ErrorAlert />
+          <UserAuthProvider>{children}</UserAuthProvider>
         </ErrorHandlerProvider>
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"

@@ -1,15 +1,11 @@
 "use client";
 
-import { FC, useContext } from "react";
+import { FC } from "react";
 
-import { useFetch } from "@/global/hooks/useFetch";
-import { USER_PATH } from "@/global/apiRoutes";
-import LoadingSpinner from "@/global/loading/LoadingSpinner";
 import ActionButtonDropdown from "./action/ActionButtonDropdown";
 import UserSearch from "./UserSearch";
 import UserTable from "@/page/main/admin/users/table/UserTable";
-import { UserType } from "@/page/main/admin/users/types";
-import ManageUsersProvider, { ManageUsersContext } from "./ManageUsersProvider";
+import ManageUsersProvider from "./ManageUsersProvider";
 import CreateUserButton from "./createUser/CreateUserButton";
 
 const ManageUsers: FC = () => {

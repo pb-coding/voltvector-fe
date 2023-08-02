@@ -1,4 +1,4 @@
-import { RoleType } from "@/global/auth/types";
+import { RoleObjectType } from "@/global/auth/types";
 
 export type UserType = {
   id: number;
@@ -6,5 +6,5 @@ export type UserType = {
   email: string;
   createdAt: Date;
   updatedAt: Date;
-  roles: RoleType[];
+  roles: RoleObjectType[];
 };

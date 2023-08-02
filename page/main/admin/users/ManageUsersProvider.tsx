@@ -9,6 +9,7 @@ import {
 
 import { UserType } from "@/page/main/admin/users/types";
 import { useFetch } from "@/global/hooks/useFetch";
+import { useMutation } from "@/global/hooks/useMutation";
 import { USER_PATH } from "@/global/apiRoutes";
 import LoadingSpinner from "@/global/loading/LoadingSpinner";
 
@@ -17,6 +18,7 @@ type ManageUsersContextType = {
   setCheckedUsers: Dispatch<SetStateAction<UserType[]>>;
   displayedUsers?: UserType[];
   setSearchTerm: Dispatch<SetStateAction<string>>;
+  deleteSelectedUsers: () => void;
 };
 
 export const ManageUsersContext = createContext<ManageUsersContextType>({
@@ -24,6 +26,7 @@ export const ManageUsersContext = createContext<ManageUsersContextType>({
   setCheckedUsers: () => [],
   displayedUsers: [],
   setSearchTerm: () => {},
+  deleteSelectedUsers: () => {},
 });
 
 type MangeUsersProviderProps = {
@@ -34,14 +37,38 @@ const MangeUsersProvider: FC<MangeUsersProviderProps> = ({ children }) => {
   const [checkedUsers, setCheckedUsers] = useState<UserType[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const { loading, data: users } = useFetch<Array<UserType> | null>(USER_PATH);
+  const {
+    loading: fetchLoading,
+    data: users,
+    refetch,
+  } = useFetch<Array<UserType> | null>(USER_PATH);
+
+  const { mutate: deleteMutation, loading: deleteLoading } = useMutation(
+    USER_PATH,
+    "delete"
+  );
+
+  const deleteSelectedUsers = async () => {
+    if (checkedUsers.length === 0) return;
+
+    const payload = { userIds: checkedUsers.map((user) => user.id) };
+
+    try {
+      await deleteMutation(payload);
+      setCheckedUsers([]);
+
+      refetch();
+    } catch (error) {
+      console.error("Error deleting users", error);
+    }
+  };
 
   const filterdUsers =
     users?.filter((user) =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 
-  if (loading) {
+  if (fetchLoading || deleteLoading) {
     return <LoadingSpinner />;
   }
 
@@ -52,6 +79,7 @@ const MangeUsersProvider: FC<MangeUsersProviderProps> = ({ children }) => {
         setCheckedUsers,
         displayedUsers: filterdUsers,
         setSearchTerm,
+        deleteSelectedUsers,
       }}
     >
       {children}

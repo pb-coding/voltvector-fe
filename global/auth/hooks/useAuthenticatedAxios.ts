@@ -6,7 +6,8 @@ import { useRefreshToken } from "@/global/auth/hooks/useRefreshToken";
 import { useUserAuth } from "@/global/auth/hooks/useUserAuth";
 
 export const useAuthenticatedAxios = (): AxiosInstance => {
-  const refresh = useRefreshToken();
+  const { setUserAuth } = useUserAuth();
+  const refresh = useRefreshToken("axios", setUserAuth);
   const { userAuth } = useUserAuth();
 
   useEffect(() => {

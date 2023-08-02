@@ -27,7 +27,7 @@ const ErrorAlert: FC = () => {
   if (errorAlert?.active) {
     return (
       <div
-        className="fixed top-0 left-0 right-0 z-50 max-w-md mx-auto mt-4 px-4"
+        className="fixed inset-0 flex flex-col items-center justify-start pt-32 z-50"
         role="alert"
       >
         <div className="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800">

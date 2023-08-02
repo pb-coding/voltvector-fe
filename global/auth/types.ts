@@ -5,7 +5,7 @@ export type UserAuthStateType = {
   id?: number;
   name?: string;
   email?: string;
-  roles?: RoleType[];
+  roles?: RoleObjectType[];
   accessToken?: string;
 };
 
@@ -14,9 +14,16 @@ export type UserAuthContextType = {
   setUserAuth: (auth: UserAuthStateType) => void;
 };
 
-export type RoleType = {
+export enum Role {
+  ADMIN = "ADMIN",
+  USER = "USER",
+}
+
+export type RoleType = Role.ADMIN | Role.USER;
+
+export type RoleObjectType = {
   id: number;
-  role: "ADMIN" | "USER";
+  role: RoleType;
   createdAt: Date;
   updatedAt: Date;
   userId: number;

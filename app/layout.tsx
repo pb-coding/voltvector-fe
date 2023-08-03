@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
-import UserAuthProvider from "@/global/auth/UserAuthProvider";
+import AuthProvider from "@/global/auth/AuthProvider";
 import ErrorHandlerProvider from "@/global/error/ErrorHandlerProvider";
 import ErrorAlert from "@/global/error/ErrorAlert";
 
@@ -34,7 +34,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
       <body className={inter.className}>
         <ErrorHandlerProvider>
           <ErrorAlert />
-          <UserAuthProvider>{children}</UserAuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </ErrorHandlerProvider>
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"

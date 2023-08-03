@@ -3,18 +3,17 @@ import { AxiosInstance } from "axios";
 
 import { axiosPrivate } from "@/global/auth/axios";
 import { useRefreshToken } from "@/global/auth/hooks/useRefreshToken";
-import { useUserAuth } from "@/global/auth/hooks/useUserAuth";
+import { useAuth } from "@/global/auth/hooks/useAuth";
 
 export const useAuthenticatedAxios = (): AxiosInstance => {
-  const { setUserAuth } = useUserAuth();
-  const refresh = useRefreshToken("axios", setUserAuth);
-  const { userAuth } = useUserAuth();
+  const refresh = useRefreshToken();
+  const { accessToken } = useAuth();
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${userAuth?.accessToken}`;
+          config.headers["Authorization"] = `Bearer ${accessToken}`;
         }
         return config;
       },
@@ -39,7 +38,7 @@ export const useAuthenticatedAxios = (): AxiosInstance => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [userAuth, refresh]);
+  }, [accessToken, refresh]);
 
   return axiosPrivate;
 };

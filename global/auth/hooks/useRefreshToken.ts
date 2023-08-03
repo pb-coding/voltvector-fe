@@ -1,25 +1,21 @@
 import axios from "@/global/auth/axios";
 import { useRouter } from "next/navigation";
 
+import { useAuth } from "@/global/auth/hooks/useAuth";
 import { REFRESH_PATH } from "@/global/apiRoutes";
-import { UserAuthStateType } from "@/global/auth/types";
 
-export const useRefreshToken = (
-  callOrigin: string,
-  setUserAuth: (userAuth: UserAuthStateType) => void
-) => {
+export const useRefreshToken = () => {
+  const { setAccessToken } = useAuth();
   const router = useRouter();
 
   const refresh = async () => {
     try {
       const response = await axios.get(REFRESH_PATH, { withCredentials: true });
-      const userAuthData = response.data.userAuthData;
-      console.log(
-        `${callOrigin}: refreshed tokens: ${JSON.stringify(userAuthData)}`
-      );
+      const accessToken = response.data.accessToken;
+      console.log(`refreshed token: ${JSON.stringify(accessToken)}`);
 
-      setUserAuth(userAuthData);
-      return userAuthData.accessToken;
+      setAccessToken(accessToken);
+      return accessToken;
     } catch (error: any) {
       // console.log(error);
       const errorStatusCode = error.response.status as number;

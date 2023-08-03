@@ -45,5 +45,5 @@ export const useFetch = <DataType>(url: string) => {
     fetchData();
   }, [fetchData]);
 
-  return { data, loading, error, refetch: fetchData };
+  return { data, setData, loading, error, refetch: fetchData };
 };

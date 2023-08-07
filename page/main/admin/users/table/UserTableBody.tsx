@@ -1,7 +1,8 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useState } from "react";
 import Avatar from "@/global/ui/Avatar";
 import { UserType } from "@/page/main/admin/users/types";
 import { ManageUsersContext } from "@/page/main/admin/users/ManageUsersProvider";
+import EditUserDialog from "../editUser/EditUserDialog";
 
 const UserTableBody: FC = () => {
   const { displayedUsers, checkedUsers, setCheckedUsers } =
@@ -16,6 +17,10 @@ const UserTableBody: FC = () => {
       setCheckedUsers([...checkedUsers, user]);
     }
   };
+
+  // by default the edit user dialog is closed and the id of the user is 0
+  const [idOfOpenEditUserDialog, setIdOfOpenEditUserDialog] =
+    useState<number>(0);
 
   return (
     <tbody>
@@ -54,12 +59,18 @@ const UserTableBody: FC = () => {
             ))}
           </td>
           <td className="px-6 py-4">
-            <a
-              href="#"
+            <button
+              onClick={() => setIdOfOpenEditUserDialog(user.id)}
               className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
             >
               Edit user
-            </a>
+            </button>
+            {idOfOpenEditUserDialog == user.id && (
+              <EditUserDialog
+                setIdOfOpenDialog={setIdOfOpenEditUserDialog}
+                user={user}
+              />
+            )}
           </td>
         </tr>
       ))}

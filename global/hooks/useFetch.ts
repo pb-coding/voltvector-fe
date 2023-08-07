@@ -3,9 +3,10 @@ import { useRouter } from "next/navigation";
 
 import { useApiResponseAlert } from "./useApiResponseAlert";
 import { useAuthenticatedAxios } from "@/global/auth/hooks/useAuthenticatedAxios";
+import { DASHBOARD_PATH } from "@/global/routes/routes";
 
 export const useFetch = <DataType>(url: string) => {
-  const [data, setData] = useState<DataType | null>(null); // TODO: type this
+  const [data, setData] = useState<DataType | null>(null);
   const [loading, setLoading] = useState<Boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -25,11 +26,12 @@ export const useFetch = <DataType>(url: string) => {
       isMounted && setData(response.data);
     } catch (error: any) {
       const errorStatusCode = error.response.status as number;
-      createApiResponseErrorAlert(errorStatusCode);
+      const errorMessage = error.response.data.error as string;
+      createApiResponseErrorAlert(errorStatusCode, errorMessage);
       isMounted && setError(error);
 
       if (errorStatusCode === 403) {
-        router.push("/dashboard");
+        router.push(DASHBOARD_PATH);
       }
     } finally {
       isMounted && setLoading(false); // TODO: check if the isMounted is necessary

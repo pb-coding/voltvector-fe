@@ -3,7 +3,7 @@
 import React, { FC, use, useEffect, useState } from "react";
 
 import { useFetch } from "@/global/hooks/useFetch";
-import { ENPHASE_OAUTH_PATH } from "@/global/apiRoutes";
+import { ENPHASE_OAUTH_PATH } from "@/global/routes/apiRoutes";
 import EnphaseAuthCard from "@/page/main/settings/enphase/EnphaseAuthCard";
 import { EnphaseAppType } from "@/page/main/settings/enphase/types";
 import LoadingSpinner from "@/global/loading/LoadingSpinner";

@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import AuthProvider from "@/global/auth/AuthProvider";
-import ErrorHandlerProvider from "@/global/error/ErrorHandlerProvider";
-import ErrorAlert from "@/global/error/ErrorAlert";
+import AlertProvider from "@/global/error/AlertProvider";
+import Alert from "@/global/error/Alert";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,10 +32,10 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
         />
       </head>
       <body className={inter.className}>
-        <ErrorHandlerProvider>
-          <ErrorAlert />
+        <AlertProvider>
+          <Alert />
           <AuthProvider>{children}</AuthProvider>
-        </ErrorHandlerProvider>
+        </AlertProvider>
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"
           defer

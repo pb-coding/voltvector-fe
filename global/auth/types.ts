@@ -1,6 +1,3 @@
-// TODO: implement roles in FE and BE
-// roles?: string[];
-
 export type AuthContextType = {
   accessToken?: string | null;
   setAccessToken: (accessToken: string | null) => void;

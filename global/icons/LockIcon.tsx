@@ -1,9 +1,14 @@
 import { FC } from "react";
 
-const LockIcon: FC = () => {
+type LockIconProps = {
+  className?: string;
+};
+
+const LockIcon: FC<LockIconProps> = ({ className }) => {
+  const classNameValue = className ?? "w-3.5 h-3.5 ml-1 mb-1";
   return (
     <svg
-      className="w-3.5 h-3.5 ml-1 mb-1"
+      className={classNameValue}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"

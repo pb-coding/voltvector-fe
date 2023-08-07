@@ -9,16 +9,17 @@ import {
 
 import { UserType } from "@/page/main/admin/users/types";
 import { useFetch } from "@/global/hooks/useFetch";
-import { useMutation } from "@/global/hooks/useMutation";
-import { USER_PATH } from "@/global/apiRoutes";
+import { useCreateUser } from "@/page/main/admin/users/createUser/hooks/useCreateUser";
+import { USER_PATH } from "@/global/routes/apiRoutes";
 import LoadingSpinner from "@/global/loading/LoadingSpinner";
+import { useDeleteUsers } from "./action/hooks/useDeleteUsers";
 
 type ManageUsersContextType = {
   checkedUsers: UserType[];
   setCheckedUsers: Dispatch<SetStateAction<UserType[]>>;
   displayedUsers?: UserType[];
   setSearchTerm: Dispatch<SetStateAction<string>>;
-  deleteSelectedUsers: () => void;
+  refetchUsers: () => void;
 };
 
 export const ManageUsersContext = createContext<ManageUsersContextType>({
@@ -26,7 +27,7 @@ export const ManageUsersContext = createContext<ManageUsersContextType>({
   setCheckedUsers: () => [],
   displayedUsers: [],
   setSearchTerm: () => {},
-  deleteSelectedUsers: () => {},
+  refetchUsers: () => {},
 });
 
 type MangeUsersProviderProps = {
@@ -37,39 +38,23 @@ const MangeUsersProvider: FC<MangeUsersProviderProps> = ({ children }) => {
   const [checkedUsers, setCheckedUsers] = useState<UserType[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+  // check if this impacts performance negatively
+  const { createUserLoadingState } = useCreateUser();
+  const { deleteUsersLoadingState } = useDeleteUsers();
+
   const {
     loading: fetchLoading,
     data: users,
     refetch,
   } = useFetch<Array<UserType> | null>(USER_PATH);
 
-  const { mutate: deleteMutation, loading: deleteLoading } = useMutation(
-    USER_PATH,
-    "delete"
-  );
-
-  const deleteSelectedUsers = async () => {
-    if (checkedUsers.length === 0) return;
-
-    const payload = { userIds: checkedUsers.map((user) => user.id) };
-
-    try {
-      await deleteMutation(payload);
-      setCheckedUsers([]);
-
-      refetch();
-    } catch (error) {
-      console.error("Error deleting users", error);
-    }
-  };
-
   const filterdUsers =
     users?.filter((user) =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 
-  if (fetchLoading || deleteLoading) {
-    return <LoadingSpinner />;
+  if (fetchLoading || deleteUsersLoadingState || createUserLoadingState) {
+    return <LoadingSpinner size="sm" />;
   }
 
   return (
@@ -79,7 +64,7 @@ const MangeUsersProvider: FC<MangeUsersProviderProps> = ({ children }) => {
         setCheckedUsers,
         displayedUsers: filterdUsers,
         setSearchTerm,
-        deleteSelectedUsers,
+        refetchUsers: refetch,
       }}
     >
       {children}

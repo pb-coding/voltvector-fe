@@ -1,11 +1,12 @@
-import { useCallback, useContext } from "react";
-import { ErrorHandlerContext } from "@/global/error/ErrorHandlerProvider";
+import { useCallback } from "react";
+
+import { useAlert } from "@/global/hooks/useAlert";
 
 export const useApiResponseAlert = () => {
-  const { setErrorAlert } = useContext(ErrorHandlerContext);
+  const { setAlert } = useAlert();
 
   const createApiResponseErrorAlert = useCallback(
-    (errorStatusCode: number) => {
+    (errorStatusCode: number, message: string | null = null) => {
       let errorMessage = "";
 
       switch (errorStatusCode) {
@@ -26,13 +27,18 @@ export const useApiResponseAlert = () => {
           errorMessage = "An error occurred while processing your request.";
           break;
       }
-      setErrorAlert({
+
+      // if a custom message is provided, use it instead
+      if (message) {
+        errorMessage = message;
+      }
+      setAlert({
         message: errorMessage,
         status: errorStatusCode,
-        active: true,
+        error: true,
       });
     },
-    [setErrorAlert]
+    [setAlert]
   );
 
   return { createApiResponseErrorAlert };

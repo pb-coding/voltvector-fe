@@ -1,7 +1,8 @@
 import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/global/auth/hooks/useAuth";
-import { LOGOUT_PATH } from "@/global/apiRoutes";
+import { LOGOUT_PATH } from "@/global/routes/apiRoutes";
+import { LOGIN_PATH } from "@/global/routes/routes";
 import axios from "@/global/auth/axios";
 
 export const useLogout = () => {
@@ -12,7 +13,7 @@ export const useLogout = () => {
     const response = await axios.get(LOGOUT_PATH, { withCredentials: true });
     console.log(JSON.stringify(response.data));
     setAccessToken(null);
-    router.push("/login");
+    router.push(LOGIN_PATH);
   };
 
   return handleLogout;

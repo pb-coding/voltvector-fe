@@ -3,11 +3,14 @@ import { useRouter } from "next/navigation";
 
 import axios from "@/global/auth/axios";
 import { useAuth } from "@/global/auth/hooks/useAuth";
-import { LOGIN_PATH } from "@/global/apiRoutes";
+import { LOGIN_PATH } from "@/global/routes/apiRoutes";
+import { useApiResponseAlert } from "@/global/hooks/useApiResponseAlert";
+import { DASHBOARD_PATH } from "@/global/routes/routes";
 
 export const useLogin = () => {
   const { setAccessToken } = useAuth();
   const router = useRouter();
+  const { createApiResponseErrorAlert } = useApiResponseAlert();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,10 +35,13 @@ export const useLogin = () => {
       setEmail("");
       setPassword("");
 
-      router.push("/dashboard"); //TODO: outsource paths in constants
-    } catch (error) {
-      // TODO: Handle errors
-      console.error("An error occurred while logging in", error);
+      router.push(DASHBOARD_PATH);
+    } catch (error: any) {
+      const errorStatusCode = error.response.status as number;
+      const errorMessage = error.response.data.error as string;
+      createApiResponseErrorAlert(errorStatusCode, errorMessage);
+      setEmail("");
+      setPassword("");
     }
   };
 

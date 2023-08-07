@@ -1,10 +1,10 @@
-export type ErrorStateType = {
+export type AlertStateType = {
   message: string | null;
   status: number | null;
-  active: boolean;
+  error: boolean;
 };
 
-export type ErrorContextType = {
-  errorAlert?: ErrorStateType;
-  setErrorAlert: (error: ErrorStateType) => void;
+export type AlertContextType = {
+  alert?: AlertStateType | null;
+  setAlert: (alert: AlertStateType | null) => void;
 };

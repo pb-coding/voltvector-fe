@@ -7,7 +7,9 @@ import { Role } from "@/global/auth/types";
 const ManageUsersPage: FC = () => {
   return (
     <main className="p-4 md:ml-64 h-auto pt-20">
-      <ManageUsers />
+      <ProtectedRoute role={Role.ADMIN}>
+        <ManageUsers />
+      </ProtectedRoute>
     </main>
   );
 };

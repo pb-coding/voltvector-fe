@@ -1,47 +1,27 @@
 "use client";
 
-import { FC, ReactNode, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { FC, ReactNode } from "react";
 
-import { useUserAuth } from "@/global/auth/hooks/useUser";
+import { useHasRole } from "@/global/auth/hooks/useHasRole";
 import Forbidden from "@/global/auth/Forbidden";
 import { RoleType } from "@/global/auth/types";
-import { useRefreshToken } from "./hooks/useRefreshToken";
+import LockSpinner from "../loading/LockSpinner";
 
 type ProtectedRouteProps = {
-  roles: RoleType[];
+  role: RoleType;
   children: ReactNode;
 };
 
 /**
  * This component is used to protect routes from unauthorized users.
- * Currently, the user must have at least one role match to access the route.
+ * Currently, the user must have the role to access the route.
  */
-const ProtectedRoute: FC<ProtectedRouteProps> = ({ roles, children }) => {
-  const { userAuth } = useUserAuth();
-  const refresh = useRefreshToken();
-  const router = useRouter();
+const ProtectedRoute: FC<ProtectedRouteProps> = ({ role, children }) => {
+  const hasRequiredRole = useHasRole(role);
 
-  useEffect(() => {
-    const checkUserAuth = async () => {
-      if (!userAuth.roles) {
-        await refresh();
-        if (!userAuth.roles) router.push("/login");
-      }
-    };
+  if (hasRequiredRole === undefined) return <LockSpinner />;
+  if (hasRequiredRole === false) return <Forbidden />;
 
-    checkUserAuth();
-  }, [userAuth, refresh, router]);
-
-  console.log("userAuth", userAuth);
-
-  if (
-    !userAuth.roles?.some((requiredRole) =>
-      userAuth.roles?.includes(requiredRole)
-    )
-  ) {
-    return <Forbidden />;
-  }
   return children;
 };
 

@@ -1,9 +1,14 @@
-import CreateUserIcon from "@/global/icons/CreateUserIcon";
-import { FC } from "react";
+import { FC, useState } from "react";
 
+import CreateUserIcon from "@/global/icons/CreateUserIcon";
+import CreateUserDialog from "@/page/main/admin/users/createUser/CreateUserDialog";
+
+// TODO: rename
 const CreateUserButton: FC = () => {
+  const [isCreateUserDialogOpen, setIsCreateUserDialogOpen] = useState(false);
   const openCreateUserDialog = () => {
-    console.log("create user");
+    console.log("open create user dialog");
+    setIsCreateUserDialogOpen(true);
   };
 
   return (
@@ -17,6 +22,9 @@ const CreateUserButton: FC = () => {
         Create User
         <CreateUserIcon />
       </button>
+      {isCreateUserDialogOpen && (
+        <CreateUserDialog setIsOpen={setIsCreateUserDialogOpen} />
+      )}
     </div>
   );
 };

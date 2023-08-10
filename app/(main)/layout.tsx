@@ -1,8 +1,7 @@
 import { FC, ReactNode } from "react";
 
-import Navbar from "@/page/main/navbar/Navbar";
-import Sidebar from "@/page/main/sidebar/Sidebar";
 import UserProvider from "@/global/auth/UserProvider";
+import Navigation from "@/page/main/navigation/Navigation";
 
 type MainLayoutProps = {
   children: ReactNode;
@@ -12,8 +11,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   return (
     <section>
       <UserProvider>
-        <Navbar />
-        <Sidebar />
+        <Navigation />
         {children}
       </UserProvider>
     </section>

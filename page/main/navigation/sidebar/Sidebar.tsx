@@ -3,21 +3,25 @@
 import { FC } from "react";
 
 import { Role } from "@/global/auth/types";
-import UserSidebarLinks from "@/page/main/sidebar/UserSidebarLinks";
-import AdminSidebarLinks from "@/page/main/sidebar/AdminSidebarLinks";
+import UserSidebarLinks from "@/page/main/navigation/sidebar/UserSidebarLinks";
+import AdminSidebarLinks from "@/page/main/navigation/sidebar/AdminSidebarLinks";
 import { useHasRole } from "@/global/auth/hooks/useHasRole";
 import LoadingSpinner from "@/global/loading/LoadingSpinner";
 
-// TODO: conditionally rendering sidebar elements & extracting into separate components
+type SidebarProps = {
+  isSidebarOpen: boolean;
+};
 
-const Sidebar: FC = () => {
+const Sidebar: FC<SidebarProps> = ({ isSidebarOpen }) => {
   const isUser = useHasRole(Role.USER);
   const isAdmin = useHasRole(Role.ADMIN);
 
   return (
     <aside
       id="logo-sidebar"
-      className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+      className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform md:translate-x-0 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 ${
+        isSidebarOpen ? "" : "-translate-x-full"
+      }`}
       aria-label="Sidebar"
       aria-hidden
     >

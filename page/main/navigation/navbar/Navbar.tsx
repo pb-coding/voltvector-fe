@@ -1,12 +1,16 @@
 "use client";
 
-import { FC, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 
-import NavbarBrand from "@/page/main/navbar/NavbarBrand";
-import AvatarDropdown from "@/page/main/navbar/AvatarDropdown";
-import AvatarButton from "@/page/main/navbar/AvatarButton";
+import NavbarBrand from "@/page/main/navigation/navbar/NavbarBrand";
+import AvatarDropdown from "@/page/main/navigation/navbar/AvatarDropdown";
+import AvatarButton from "@/page/main/navigation/navbar/AvatarButton";
 
-const Navbar: FC = () => {
+type NavbarProps = {
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const Navbar: FC<NavbarProps> = ({ setIsSidebarOpen }) => {
   const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
 
   return (
@@ -15,11 +19,10 @@ const Navbar: FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
             <button
-              data-drawer-target="logo-sidebar"
-              data-drawer-toggle="logo-sidebar"
+              onClick={() => setIsSidebarOpen((prev) => !prev)}
               aria-controls="logo-sidebar"
               type="button"
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             >
               <span className="sr-only">Open sidebar</span>
               <svg

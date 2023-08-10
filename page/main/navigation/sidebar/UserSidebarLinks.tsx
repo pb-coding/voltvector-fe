@@ -1,10 +1,10 @@
 import { FC } from "react";
 import Link from "next/link";
 
-import HomeIcon from "../../../global/icons/HomeIcon";
-import SunIcon from "../../../global/icons/SunIcon";
-import SettingsIcon from "../../../global/icons/SettingsIcon";
-import PieDiagramIcon from "../../../global/icons/PieDiagramIcon";
+import HomeIcon from "../../../../global/icons/HomeIcon";
+import SunIcon from "../../../../global/icons/SunIcon";
+import SettingsIcon from "../../../../global/icons/SettingsIcon";
+import PieDiagramIcon from "../../../../global/icons/PieDiagramIcon";
 import { DASHBOARD_PATH } from "@/global/routes/routes";
 
 const UserSidebarLinks: FC = () => {

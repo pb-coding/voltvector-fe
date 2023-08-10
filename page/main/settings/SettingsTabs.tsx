@@ -12,8 +12,8 @@ type SettingsPageProps = {
 };
 
 export const settingsTabNames = {
-  enphase: "Enphase Authorization",
-  meross: "Meross Authorization",
+  enphase: "Enphase Auth",
+  meross: "Meross Auth",
   account: "Account",
 };
 const SettingsTabs: FC<SettingsPageProps> = ({ tab }) => {

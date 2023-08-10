@@ -11,7 +11,7 @@ import CreateUserButton from "./createUser/CreateUserButton";
 const ManageUsers: FC = () => {
   return (
     <section>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative overflow-auto shadow-md sm:rounded-lg">
         <ManageUsersProvider>
           <div className="flex flex-wrap items-center justify-between pb-4">
             <div className="flex space-x-4">

@@ -16,12 +16,12 @@ const Tabs: FC<TabsProps> = ({ tabs, currentTab }) => {
 
   return (
     <>
-      <ul className="flex flex-col space-y-2 text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex sm:flex-row sm:space-y-0 dark:divide-gray-700 dark:text-gray-400 mb-4">
+      <ul className="flex text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:space-y-0 dark:divide-gray-700 dark:text-gray-400 mb-4">
         {tabs.map((tab, index) => (
           <li key={tab.name} className="w-full">
             <Link
               href={tab.link}
-              className={`inline-block w-full p-4 ${
+              className={`inline-block w-full p-4 whitespace-nowrap ${
                 index === 0
                   ? "rounded-l-lg"
                   : index === tabs.length - 1

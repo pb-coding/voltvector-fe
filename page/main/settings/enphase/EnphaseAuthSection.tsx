@@ -1,7 +1,8 @@
 "use client";
 
-import React, { FC, use, useEffect, useState } from "react";
+import React, { FC } from "react";
 
+import { useUser } from "@/global/auth/hooks/useUser";
 import { useFetch } from "@/global/hooks/useFetch";
 import { ENPHASE_OAUTH_PATH } from "@/global/routes/apiRoutes";
 import EnphaseAuthCard from "@/page/main/settings/enphase/EnphaseAuthCard";
@@ -9,20 +10,20 @@ import { EnphaseAppType } from "@/page/main/settings/enphase/types";
 import LoadingSpinner from "@/global/loading/LoadingSpinner";
 
 const EnphaseAuthSection: FC = () => {
-  // const [enphaseApps, setEnphaseApps] = useState<EnphaseAppType[] | null>(null);
-  const { loading, data: enphaseApps } = useFetch<EnphaseAppType[]>(
-    ENPHASE_OAUTH_PATH + "?userid=2"
-  );
+  const { loading, data: enphaseApps } =
+    useFetch<EnphaseAppType[]>(ENPHASE_OAUTH_PATH);
 
-  // useEffect(() => {
+  const { userData } = useUser();
+  const userId = userData?.id;
 
-  if (loading) return <LoadingSpinner />;
+  // TODO: fix loading spinner position
+  if (loading || !userId) return <LoadingSpinner classNames="col-span-2" />;
 
   if (enphaseApps && enphaseApps.length > 0) {
     return (
       <>
         {enphaseApps.map((app: EnphaseAppType) => (
-          <EnphaseAuthCard key={app.name} app={app} />
+          <EnphaseAuthCard key={app.name} app={app} userId={userId} />
         ))}
       </>
     );

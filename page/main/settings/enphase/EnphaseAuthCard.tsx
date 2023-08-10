@@ -9,6 +9,7 @@ import LockIcon from "@/global/icons/LockIcon";
 
 type EnphaseAuthCardProps = {
   app: EnphaseAppType;
+  userId: number;
 };
 
 const calculateStatus = (app: EnphaseAppType) => {
@@ -26,13 +27,12 @@ const calculateStatus = (app: EnphaseAppType) => {
   return enphaseAppStatus.NEEDS_REAUTH;
 };
 
-const EnphaseAuthCard: FC<EnphaseAuthCardProps> = ({ app }) => {
+const EnphaseAuthCard: FC<EnphaseAuthCardProps> = ({ app, userId }) => {
   const appStatus = calculateStatus(app);
   const statusColor =
     appStatus === enphaseAppStatus.CONNECTED ? "green" : "red";
-  const userid = 2; // TODO: get userid from context
 
-  const link = `https://api.enphaseenergy.com/oauth/authorize?response_type=code&client_id=${app.clientId}&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fenphase%2Foauth%3Fuserid%3D${userid}%26appname%3D${app.name}`;
+  const link = `https://api.enphaseenergy.com/oauth/authorize?response_type=code&client_id=${app.clientId}&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fenphase%2Foauth%3Fuserid%3D${userId}%26appname%3D${app.name}`;
 
   return (
     <div

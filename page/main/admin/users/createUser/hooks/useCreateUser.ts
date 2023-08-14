@@ -45,7 +45,9 @@ export const useCreateUser = () => {
     const payload = { email, name, password };
 
     try {
-      const response = await createMutation(payload);
+      const response = await createMutation({
+        payload: payload as CreateUserPayload,
+      });
       console.log(response);
       if (response) {
         setAlert({

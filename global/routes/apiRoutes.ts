@@ -7,5 +7,7 @@ export const ENPHASE_OAUTH_PATH = "/api/enphase/apps";
 
 export const USER_PATH = "/api/user";
 
+export const ENERGY_PATH = "/api/energy";
+
 // userId 0 is used to get data of the current user
 export const USER_PATH_ME = USER_PATH + "/0";

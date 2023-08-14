@@ -1,5 +1,7 @@
-import ProtectedRoute from "@/global/auth/ProtectedRoute";
 import { FC } from "react";
+
+import ProtectedRoute from "@/global/auth/ProtectedRoute";
+import EnergyDataOverview from "@/page/main/dashboard/EnergyDataOverview";
 
 import { Role } from "@/global/auth/types";
 
@@ -15,7 +17,7 @@ const DashboardPage: FC = () => {
           <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64"></div>
           <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64"></div>
         </div>
-        <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4"></div>
+        <EnergyDataOverview />
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>
           <div className="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"></div>

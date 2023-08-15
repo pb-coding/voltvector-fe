@@ -49,8 +49,15 @@ const EnergyDataChart: FC<EnergyDataChartProps> = ({ energyData }) => {
           dataKey="production"
           stroke="#82ca9d"
           activeDot={{ r: 8 }}
+          dot={{ r: 1 }}
         />
-        <Line type="monotone" dataKey="consumption" stroke="#8884d8" />
+        <Line
+          type="monotone"
+          dataKey="consumption"
+          stroke="#8884d8"
+          activeDot={{ r: 8 }}
+          dot={{ r: 1 }}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

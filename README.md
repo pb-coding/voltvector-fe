@@ -28,6 +28,10 @@ BE includes:
 
 Work in progress..
 
+![image](https://github.com/pb-coding/voltvector-fe/assets/71174645/fcf9edbe-8cd0-4ff2-b2c0-3775488bb142)
+
+![image](https://github.com/pb-coding/voltvector-fe/assets/71174645/8fae1283-0bc2-4227-87d4-637bbe62d2d7)
+
 ![image](https://github.com/pb-coding/voltvector-fe/assets/71174645/3b1c45dd-687a-4ffe-ac0e-53e54b82fd19)
 
 ![image](https://github.com/pb-coding/voltvector-fe/assets/71174645/fe63c177-d818-49b0-9621-ad089195e6db)

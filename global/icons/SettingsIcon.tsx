@@ -1,9 +1,14 @@
 import { FC } from "react";
 
-const SettingsIcon: FC = () => {
+import { IconProps } from "@/global/icons/types";
+
+const SettingsIcon: FC<IconProps> = ({ className }) => {
+  const classes = className
+    ? `${className}`
+    : "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white";
   return (
     <svg
-      className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+      className={classes}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"

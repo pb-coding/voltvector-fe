@@ -9,5 +9,7 @@ export const USER_PATH = "/api/user";
 
 export const ENERGY_PATH = "/api/energy";
 
+export const SMART_HOME_PROVIDER_PATH = "/api/smarthome/providers";
+
 // userId 0 is used to get data of the current user
 export const USER_PATH_ME = USER_PATH + "/0";

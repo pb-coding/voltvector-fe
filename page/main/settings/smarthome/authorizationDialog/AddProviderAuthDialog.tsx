@@ -13,6 +13,8 @@ const AddProviderAuthDialog: FC<AddProviderAuthDialogProps> = ({
   provider,
   isReauth,
 }) => {
+  const titlePrefix = isReauth ? "Reauth" : "Add";
+  const title = titlePrefix + " " + provider + "Account";
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div className="relative w-full max-w-2xl max-h-full">
@@ -20,7 +22,7 @@ const AddProviderAuthDialog: FC<AddProviderAuthDialogProps> = ({
           <div className="p-6 space-y-6">
             <div className="flex items-start justify-between pb-4 rounded-t border-b dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Add {provider} Account
+                {title}
               </h3>
               <button
                 onClick={() => setIsOpen(false)}

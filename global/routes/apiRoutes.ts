@@ -13,3 +13,8 @@ export const SMART_HOME_PROVIDER_PATH = "/api/smarthome/providers";
 
 // userId 0 is used to get data of the current user
 export const USER_PATH_ME = USER_PATH + "/0";
+
+export const MEROSS_DEVICES_PATH = "/api/meross/devices";
+export const MEROSS_DEVICE_PATH = "/api/meross/device";
+
+export const DEVICELIST_PATH = "/api/smarthome/devicelist";

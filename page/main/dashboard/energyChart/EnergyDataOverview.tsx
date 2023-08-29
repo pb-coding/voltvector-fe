@@ -4,6 +4,7 @@ import { FC } from "react";
 
 import ChartDateNavigation from "./navigation/ChartDateNavigation";
 import EnergyDataChart from "@/page/main/dashboard/energyChart/EnergyDataChart";
+import EnergyDataChartSkeleton from "@/page/main/dashboard/energyChart/EnergyDataChartSkeleton";
 import { useEnergyChart } from "./hooks/useEnergyChart";
 
 const EnergyDataOverview: FC = () => {
@@ -13,7 +14,7 @@ const EnergyDataOverview: FC = () => {
     <div className="border-2 rounded-lg border-gray-300 dark:border-gray-600 h-auto mb-4 p-4">
       <ChartDateNavigation />
       {fetchLoading || !selectedEnergyData ? (
-        <p>Loading...</p>
+        <EnergyDataChartSkeleton />
       ) : (
         <EnergyDataChart energyData={selectedEnergyData} />
       )}

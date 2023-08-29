@@ -1,6 +1,8 @@
 import { FC } from "react";
 
 import AddProviderAuthForm from "@/page/main/settings/smarthome/authorizationDialog/AddProviderAuthForm";
+import DeleteButton from "@/global/delete/DeleteButton";
+import { useDeleteProviderAuth } from "@/page/main/settings/smarthome/authorizationDialog/hooks/useDeleteProviderAuth";
 
 type AddProviderAuthDialogProps = {
   setIsOpen: (isOpen: boolean) => void;
@@ -13,8 +15,10 @@ const AddProviderAuthDialog: FC<AddProviderAuthDialogProps> = ({
   provider,
   isReauth,
 }) => {
-  const titlePrefix = isReauth ? "Reauth" : "Add";
-  const title = titlePrefix + " " + provider + "Account";
+  const prefix = isReauth ? "Renew" : "Add";
+  const title = prefix + " " + provider + " Account";
+  const { deleteProvider } = useDeleteProviderAuth();
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div className="relative w-full max-w-2xl max-h-full">
@@ -53,7 +57,18 @@ const AddProviderAuthDialog: FC<AddProviderAuthDialogProps> = ({
                 deleted. Please enter your new credentials.
               </p>
             )}
-            <AddProviderAuthForm setIsOpen={setIsOpen} provider={provider} />
+            {isReauth ? (
+              <DeleteButton
+                text="Remove Meross Account"
+                deleteFunction={() => deleteProvider(setIsOpen, provider)}
+              />
+            ) : (
+              <AddProviderAuthForm
+                setIsOpen={setIsOpen}
+                provider={provider}
+                isReauth={isReauth}
+              />
+            )}
           </div>
         </div>
       </div>

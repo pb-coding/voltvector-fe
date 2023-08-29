@@ -5,7 +5,10 @@ import { useApiResponseAlert } from "./useApiResponseAlert";
 import { useAuthenticatedAxios } from "@/global/auth/hooks/useAuthenticatedAxios";
 import { DASHBOARD_PATH } from "@/global/routes/routes";
 
-export const useFetch = <DataType>(url: string) => {
+export const useFetch = <DataType>(
+  url: string,
+  shouldFetch: boolean = true
+) => {
   const [data, setData] = useState<DataType | null>(null);
   const [loading, setLoading] = useState<Boolean>(false);
   const [error, setError] = useState<Error | null>(null);
@@ -44,8 +47,10 @@ export const useFetch = <DataType>(url: string) => {
   }, [url, authenticatedAxios, createApiResponseErrorAlert, router]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (shouldFetch) {
+      fetchData();
+    }
+  }, [fetchData, shouldFetch]);
 
   return { data, setData, loading, error, refetch: fetchData };
 };

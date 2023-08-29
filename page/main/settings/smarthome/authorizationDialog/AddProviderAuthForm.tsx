@@ -7,11 +7,13 @@ import { useAddProviderAuth } from "@/page/main/settings/smarthome/authorization
 type AddProviderAuthFormProps = {
   setIsOpen: (isOpen: boolean) => void;
   provider: string;
+  isReauth: boolean;
 };
 
 const AddProviderAuthForm: FC<AddProviderAuthFormProps> = ({
   setIsOpen,
   provider,
+  isReauth,
 }) => {
   const {
     email,
@@ -27,6 +29,8 @@ const AddProviderAuthForm: FC<AddProviderAuthFormProps> = ({
     event.preventDefault();
     addProvider(setIsOpen, provider);
   };
+
+  const buttonText = isReauth ? "Renew Account" : "Add Account";
 
   return (
     <form onSubmit={handleSubmit}>
@@ -87,7 +91,7 @@ const AddProviderAuthForm: FC<AddProviderAuthFormProps> = ({
         type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
-        Add Account
+        {buttonText}
       </button>
     </form>
   );

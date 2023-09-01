@@ -12,12 +12,9 @@ type EnphaseAuthCardProps = {
   userId: number;
 };
 
-const backendUrlExternal =
-  process.env.NEXT_PUBLIC_BACKEND_URL_EXTERNAL ?? "missing";
-const backendPortExternal =
-  process.env.NEXT_PUBLIC_BACKEND_PORT_EXTERNAL ?? "missing";
-const backendProtocolExternal =
-  process.env.NEXT_PUBLIC_BACKEND_PROTOCOL_EXTERNAL ?? "missing";
+const frontendProtocol = process.env.NEXT_PUBLIC_FRONTEND_PROTOCOL ?? "missing";
+const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "missing";
+const frontendPort = process.env.NEXT_PUBLIC_FRONTEND_PORT ?? "missing";
 
 const calculateStatus = (app: EnphaseAppType) => {
   if (app.issueDate == null) {
@@ -39,8 +36,18 @@ const EnphaseAuthCard: FC<EnphaseAuthCardProps> = ({ app, userId }) => {
   const statusColor =
     appStatus === enphaseAppStatus.CONNECTED ? "green" : "red";
 
+  const portEnding =
+    frontendPort === "80"
+      ? ""
+      : frontendPort === "443"
+      ? ""
+      : `:${frontendPort}`;
+  const redirectUri = encodeURIComponent(
+    `${frontendProtocol}://${frontendUrl}${portEnding}/api/enphase/oauth?userid=${userId}&appname=${app.name}`
+  );
+
   // TODO: route this through the nextjs proxy to the backend
-  const link = `https://api.enphaseenergy.com/oauth/authorize?response_type=code&client_id=${app.clientId}&redirect_uri=${backendProtocolExternal}%3A%2F%2F${backendUrlExternal}%3A${backendPortExternal}%2Fenphase%2Foauth%3Fuserid%3D${userId}%26appname%3D${app.name}`;
+  const link = `https://api.enphaseenergy.com/oauth/authorize?response_type=code&client_id=${app.clientId}&redirect_uri=${redirectUri}`;
 
   return (
     <div

@@ -8,8 +8,10 @@ import Alert from "@/global/error/Alert";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const environment = process.env.ENVIRONMENT ?? "no environment set";
+
 export const metadata = {
-  title: "VoltVector - Energy Management System",
+  title: "VoltVector - Energy Management System - " + environment,
   description:
     "Energy Management System for users with solar systems from Enphase Energy.",
 };

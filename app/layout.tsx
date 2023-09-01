@@ -8,7 +8,7 @@ import Alert from "@/global/error/Alert";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const environment = process.env.ENVIRONMENT ?? "no environment set";
+const environment = process.env.NEXT_PUBLIC_ENVIRONMENT ?? "missing";
 
 export const metadata = {
   title: "VoltVector - Energy Management System - " + environment,

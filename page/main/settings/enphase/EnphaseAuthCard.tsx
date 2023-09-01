@@ -12,9 +12,9 @@ type EnphaseAuthCardProps = {
   userId: number;
 };
 
-const backendUrl = process.env.BACKEND_URL ?? "localhost";
-const backendPort = process.env.BACKEND_PORT ?? 3001;
-const backendProtocol = process.env.BACKEND_PROTOCOL ?? "http";
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "missing";
+const backendPort = process.env.NEXT_PUBLIC_BACKEND_PORT ?? "missing";
+const backendProtocol = process.env.NEXT_PUBLIC_BACKEND_PROTOCOL ?? "missing";
 
 const calculateStatus = (app: EnphaseAppType) => {
   if (app.issueDate == null) {

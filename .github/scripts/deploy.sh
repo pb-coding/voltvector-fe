@@ -32,7 +32,6 @@ docker run -d \
   --name $CONTAINER_NAME \
   --network $DOCKER_NETWORK \
   -v $TARGET_DIRECTORY:/app \
-  --env-file .env \
   $DOCKER_REGISTRY/$DOCKER_USERNAME/$DOCKER_IMAGE_NAME:latest
 
 echo "Deployment complete."

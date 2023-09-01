@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 
-const backendUrl = process.env.BACKEND_URL ?? "localhost";
-const backendPort = process.env.BACKEND_PORT ?? 3001;
-const backendProtocol = process.env.BACKEND_PROTOCOL ?? "http";
+const backendUrl = process.env.BACKEND_URL;
+const backendPort = process.env.BACKEND_PORT;
+const backendProtocol = process.env.BACKEND_PROTOCOL;
 
 const nextConfig = {
   async rewrites() {

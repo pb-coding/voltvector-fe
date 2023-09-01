@@ -12,6 +12,10 @@ type EnphaseAuthCardProps = {
   userId: number;
 };
 
+const backendUrl = process.env.BACKEND_URL ?? "localhost";
+const backendPort = process.env.BACKEND_PORT ?? 3001;
+const backendProtocol = process.env.BACKEND_PROTOCOL ?? "http";
+
 const calculateStatus = (app: EnphaseAppType) => {
   if (app.issueDate == null) {
     return enphaseAppStatus.NOT_CONNECTED;
@@ -32,7 +36,7 @@ const EnphaseAuthCard: FC<EnphaseAuthCardProps> = ({ app, userId }) => {
   const statusColor =
     appStatus === enphaseAppStatus.CONNECTED ? "green" : "red";
 
-  const link = `https://api.enphaseenergy.com/oauth/authorize?response_type=code&client_id=${app.clientId}&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fenphase%2Foauth%3Fuserid%3D${userId}%26appname%3D${app.name}`;
+  const link = `https://api.enphaseenergy.com/oauth/authorize?response_type=code&client_id=${app.clientId}&redirect_uri=${backendProtocol}%3A%2F%2F${backendUrl}%3A${backendPort}%2Fenphase%2Foauth%3Fuserid%3D${userId}%26appname%3D${app.name}`;
 
   return (
     <div

@@ -31,7 +31,7 @@ BE:
 - PostgresSQL
 
 
-![dashboard-overview](https://github.com/pb-coding/voltvector-fe/assets/71174645/8d02ade2-fe63-4c4c-baa1-5e11058190ca)
+![268642587-8d02ade2-fe63-4c4c-baa1-5e11058190ca](https://github.com/pb-coding/voltvector-fe/assets/71174645/b6d62205-6809-490c-8aa2-9caf50163899)
 
 ![device-energy-overview](https://github.com/pb-coding/voltvector-fe/assets/71174645/456b339a-712b-446d-98b8-bdeeee43d1bb)
 
